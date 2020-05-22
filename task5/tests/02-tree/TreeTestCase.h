@@ -13,12 +13,14 @@
 class TreeTestCase : public ::testing::Test {
 protected:
     void SetUp() {
-        boost::filesystem::create_directories("tree_test/my_folder");
-        boost::filesystem::ofstream( "tree_test/a.cpp" );
+        auto tmpDir = boost::filesystem::temp_directory_path().string();
+        boost::filesystem::create_directories(tmpDir + "/tree_test/my_folder");
+        boost::filesystem::ofstream( tmpDir + "/tree_test/a.cpp" );
     }
 
     void TearDown() {
-        boost::filesystem::remove_all("tree_test");
+        auto tmpDir = boost::filesystem::temp_directory_path().string();
+        boost::filesystem::remove_all(tmpDir + "/tree_test");
     }
 };
 

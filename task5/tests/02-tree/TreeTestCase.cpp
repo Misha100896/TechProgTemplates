@@ -13,6 +13,8 @@ TEST_F(TreeTestCase, InvalidArg) {
 }
 
 TEST_F(TreeTestCase, CheckTreeOnlyDirs) {
+    auto tmpDir = boost::filesystem::temp_directory_path().string();
+
     FileNode node1;
     node1.name = "tree_test";
     node1.is_dir = true;
@@ -23,10 +25,12 @@ TEST_F(TreeTestCase, CheckTreeOnlyDirs) {
 
     node1.children.push_back(node2);
 
-    ASSERT_EQ(GetTree("tree_test", true), node1);
+    ASSERT_EQ(GetTree(tmpDir + "/tree_test", true), node1);
 }
 
 TEST_F(TreeTestCase, CheckTreeWithFiles) {
+    auto tmpDir = boost::filesystem::temp_directory_path().string();
+
     FileNode node1;
     node1.name = "tree_test";
     node1.is_dir = true;
@@ -42,5 +46,5 @@ TEST_F(TreeTestCase, CheckTreeWithFiles) {
     node1.children.push_back(node3);
     node1.children.push_back(node2);
 
-    ASSERT_EQ(GetTree("tree_test", false), node1);
+    ASSERT_EQ(GetTree(tmpDir + "/tree_test", false), node1);
 }

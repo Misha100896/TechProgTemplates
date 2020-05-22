@@ -8,8 +8,8 @@
 #include <Weather.h>
 
 class WeatherMock : public Weather {
-protected:
-    cpr::Response Get(const std::string& city);
+public:
+    MOCK_METHOD1(Get, cpr::Response(const std::string& city));
 };
 
 
